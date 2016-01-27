@@ -1,4 +1,4 @@
-package edu.lang.jscheme;
+package edu.lang.jscheme.parser;
 
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.SIMPLE_STYLE;

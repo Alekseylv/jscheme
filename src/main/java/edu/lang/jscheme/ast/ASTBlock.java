@@ -1,7 +1,7 @@
 package edu.lang.jscheme.ast;
 
+import edu.lang.jscheme.data.SchemeExpression;
 import edu.lang.jscheme.data.SchemeTerm;
-import edu.lang.jscheme.data.SchemeVariable;
 import edu.lang.jscheme.util.LinkedList;
 
 public class ASTBlock extends AST {
@@ -18,12 +18,12 @@ public class ASTBlock extends AST {
     }
 
     @Override
-    public SchemeTerm getTerm() {
+    public SchemeExpression getExpression() {
         throw new UnsupportedOperationException("Not a node");
     }
 
     @Override
-    public String getTermString() {
+    public SchemeTerm getTerm() {
         throw new UnsupportedOperationException("Not a node");
     }
 
@@ -41,8 +41,8 @@ public class ASTBlock extends AST {
     }
 
     public boolean isDefinition() {
-        boolean t = !leafs.isEmpty() && leafs.head().getTerm() instanceof SchemeVariable;
-        return t && "define".equals(leafs.head().getTermString());
+        boolean t = !leafs.isEmpty() && leafs.head().getExpression() instanceof SchemeTerm;
+        return t && "define".equals(leafs.head().getTerm().name);
     }
 
     public boolean isValidDefinition() {
@@ -55,7 +55,7 @@ public class ASTBlock extends AST {
     }
 
     private boolean isVariableNameCorrect(AST ast) {
-        return !ast.isBlock() && ast.getTerm() instanceof SchemeVariable;
+        return !ast.isBlock() && ast.getExpression() instanceof SchemeTerm;
     }
 
     public boolean areFunctionArgumentsCorrect(AST ast) {

@@ -1,17 +1,16 @@
 package edu.lang.jscheme.parser;
 
-import edu.lang.jscheme.Token;
 import edu.lang.jscheme.data.SchemeBoolean;
 import edu.lang.jscheme.data.SchemeTerm;
 
-public class BooleanParser extends TermParser {
+public class BooleanParser extends Parser {
     @Override
     public boolean matches(String text) {
         return "#t".equals(text) || "#f".equals(text);
     }
 
     @Override
-    public SchemeTerm parse(Token token) {
+    public SchemeBoolean parse(Token token) {
         boolean value;
         if ("#t".equals(token.text)) {
             value = true;

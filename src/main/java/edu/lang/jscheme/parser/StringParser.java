@@ -1,12 +1,10 @@
 package edu.lang.jscheme.parser;
 
-import edu.lang.jscheme.Token;
-import edu.lang.jscheme.data.SchemeString;
-import edu.lang.jscheme.data.SchemeTerm;
-
 import java.util.regex.Pattern;
 
-public class StringParser extends TermParser {
+import edu.lang.jscheme.data.SchemeString;
+
+public class StringParser extends Parser {
     private static Pattern pattern = Pattern.compile("^\\\"((?!\\\").)*\\\"$");
 
     @Override
@@ -15,7 +13,7 @@ public class StringParser extends TermParser {
     }
 
     @Override
-    public SchemeTerm parse(Token token) {
+    public SchemeString parse(Token token) {
         return new SchemeString(token.text.substring(1, token.text.length() - 1));
     }
 }

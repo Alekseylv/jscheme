@@ -57,12 +57,17 @@ public abstract class Try<T> {
 
         @Override
         public <R> Try<R> map(Function<T, R> f) {
-            return new Success<>(f.apply(result));
+            return tryable(() -> f.apply(result));
         }
 
         @Override
         public <R> Try<R> flatMap(Function<T, Try<R>> f) {
             return f.apply(result);
+        }
+
+        @Override
+        public String toString() {
+            return result.toString();
         }
     }
 
@@ -97,6 +102,11 @@ public abstract class Try<T> {
         @Override
         public <R> Try<R> flatMap(Function<T, Try<R>> f) {
             return new Failure<>(e);
+        }
+
+        @Override
+        public String toString() {
+            return e.toString();
         }
     }
 }

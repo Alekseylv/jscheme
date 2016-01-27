@@ -1,10 +1,25 @@
 package edu.lang.jscheme.parser;
 
-import edu.lang.jscheme.Token;
 import edu.lang.jscheme.data.SchemeTerm;
 
-public abstract class TermParser {
-    public abstract boolean matches(String text);
+import java.util.regex.Pattern;
 
-    public abstract SchemeTerm parse(Token token);
+import static edu.lang.jscheme.util.ErrorUtil.assertAtom;
+
+public class TermParser extends Parser {
+
+    private static final Pattern pattern = Pattern.compile("^((?!(\\)\\( )).)*$");
+
+    @Override
+    public boolean matches(String text) {
+        return pattern.matcher(text).matches();
+    }
+
+    @Override
+    public SchemeTerm parse(Token token) {
+        assertAtom(token);
+        return new SchemeTerm(token.text);
+    }
+
+
 }

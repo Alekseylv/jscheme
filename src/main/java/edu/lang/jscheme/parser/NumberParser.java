@@ -1,12 +1,12 @@
 package edu.lang.jscheme.parser;
 
-import edu.lang.jscheme.Token;
+import edu.lang.jscheme.data.SchemeExpression;
 import edu.lang.jscheme.data.SchemeNumber;
 import edu.lang.jscheme.data.SchemeTerm;
 
 import java.util.regex.Pattern;
 
-public class NumberParser extends TermParser {
+public class NumberParser extends Parser {
     public static final Pattern pattern = Pattern.compile("^\\d{1,32}$");
 
     @Override
@@ -15,7 +15,7 @@ public class NumberParser extends TermParser {
     }
 
     @Override
-    public SchemeTerm parse(Token token) {
+    public SchemeNumber parse(Token token) {
         try {
             return new SchemeNumber(Integer.parseInt(token.text));
         } catch (NumberFormatException e) {

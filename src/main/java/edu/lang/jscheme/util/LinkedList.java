@@ -2,8 +2,10 @@ package edu.lang.jscheme.util;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public abstract class LinkedList<T> implements Iterable<T> {
 
@@ -18,12 +20,29 @@ public abstract class LinkedList<T> implements Iterable<T> {
 
     public abstract <R> LinkedList<R> map(Function<T,R> f);
 
-    public LinkedList<T> reverse() {
-        return fold((LinkedList<T>) new Null<T>(), LinkedList::add);
+    public abstract LinkedList<T> filter(Predicate<T> p);
+
+    public Optional<T> find(Predicate<T> p) {
+        for (T t : this) {
+            if (p.test(t)) {
+                return Optional.of(t);
+            }
+        }
+        return Optional.empty();
     }
 
-    public static <T> LinkedList<T> empty() {
-        return new Null<>();
+    public <R, U> LinkedList<R> zip(LinkedList<U> that, BiFunction<T, U, R> f) {
+        Iterator<T> t = this.iterator();
+        Iterator<U> u = that.iterator();
+        LinkedList<R> r = LinkedList.empty();
+        while (t.hasNext() && u.hasNext()) {
+            r = r.add(f.apply(t.next(), u.next()));
+        }
+        return r.reverse();
+    }
+
+    public LinkedList<T> reverse() {
+        return fold((LinkedList<T>) new Null<T>(), LinkedList::add);
     }
 
     public LinkedList<T> add(T t) {
@@ -32,6 +51,10 @@ public abstract class LinkedList<T> implements Iterable<T> {
 
     public Iterator<T> iterator() {
         return new ListIterator<>(this);
+    }
+
+    public static <T> LinkedList<T> empty() {
+        return new Null<>();
     }
 
     public static class Cons<T> extends LinkedList<T> {
@@ -69,8 +92,16 @@ public abstract class LinkedList<T> implements Iterable<T> {
         }
 
         @Override
+        public LinkedList<T> filter(Predicate<T> p) {
+            if (p.test(head)) {
+                return new Cons<>(head, tail.filter(p));
+            }
+            return tail.filter(p);
+        }
+
+        @Override
         public String toString() {
-            return "LinkedList(" + tail.fold(new StringBuilder().append(head), StringBuilder::append).append(")").toString();
+            return "LinkedList(" + tail.fold(new StringBuilder().append(head), (r, a) -> r.append(',').append(a)).append(")").toString();
         }
 
     }
@@ -100,6 +131,11 @@ public abstract class LinkedList<T> implements Iterable<T> {
         @Override
         public <R> LinkedList<R> map(Function<T, R> f) {
             return LinkedList.empty();
+        }
+
+        @Override
+        public LinkedList<T> filter(Predicate<T> p) {
+            return this;
         }
 
         @Override

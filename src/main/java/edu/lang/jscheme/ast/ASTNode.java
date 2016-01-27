@@ -1,13 +1,13 @@
 package edu.lang.jscheme.ast;
 
+import edu.lang.jscheme.data.SchemeExpression;
 import edu.lang.jscheme.data.SchemeTerm;
-import edu.lang.jscheme.data.SchemeVariable;
 import edu.lang.jscheme.util.LinkedList;
 
 public class ASTNode extends AST {
-    public final SchemeTerm term;
+    public final SchemeExpression term;
 
-    public ASTNode(SchemeTerm term) {
+    public ASTNode(SchemeExpression term) {
         this.term = term;
     }
 
@@ -17,13 +17,13 @@ public class ASTNode extends AST {
     }
 
     @Override
-    public SchemeTerm getTerm() {
+    public SchemeExpression getExpression() {
         return term;
     }
 
     @Override
-    public String getTermString() {
-        return ((SchemeVariable) term).name;
+    public SchemeTerm getTerm() {
+        return ((SchemeTerm) term);
     }
 
     @Override

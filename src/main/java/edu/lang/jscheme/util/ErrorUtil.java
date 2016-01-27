@@ -1,6 +1,6 @@
 package edu.lang.jscheme.util;
 
-import edu.lang.jscheme.Token;
+import edu.lang.jscheme.parser.Token;
 
 import java.util.HashSet;
 
