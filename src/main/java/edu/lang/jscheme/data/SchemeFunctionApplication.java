@@ -1,6 +1,7 @@
 package edu.lang.jscheme.data;
 
 import edu.lang.jscheme.interpretor.SchemeEnvironment;
+import edu.lang.jscheme.interpretor.internal.SchemeApplicable;
 import edu.lang.jscheme.util.LinkedList;
 
 public class SchemeFunctionApplication extends SchemeExpression {
@@ -13,7 +14,7 @@ public class SchemeFunctionApplication extends SchemeExpression {
 
     @Override
     public SchemeValue eval(SchemeEnvironment env) {
-        SchemeApplyable a = args.head().eval(env).as(SchemeApplyable.class);
+        SchemeApplicable a = args.head().eval(env).as(SchemeApplicable.class);
         return a.apply(args.tail().map(x -> x.eval(env)));
     }
 }

@@ -1,15 +1,16 @@
 package edu.lang.jscheme.util;
 
-import edu.lang.jscheme.parser.Token;
+import static java.util.Arrays.asList;
 
 import java.util.HashSet;
 
-import static java.util.Arrays.asList;
+import edu.lang.jscheme.parser.Token;
 
 public class ErrorUtil {
 
-    private static final HashSet<Character> chars = new HashSet<>(asList('!', '#', '%', '&', '*', '+', '-', '/', ':', '<', '=', '>', '?', '@', '^',
-            '|', '~'));
+    private static final HashSet<Character> chars = new HashSet<>(
+            asList('!', '#', '%', '&', '*', '+', '-', '/', ':', '<', '=', '>', '?', '@', '^',
+                    '|', '~'));
 
     public static void assertAtom(Token token) {
         Character c = token.text.charAt(0);

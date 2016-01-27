@@ -1,10 +1,10 @@
 package edu.lang.jscheme.parser;
 
-import edu.lang.jscheme.data.SchemeTerm;
+import static edu.lang.jscheme.util.ErrorUtil.assertAtom;
 
 import java.util.regex.Pattern;
 
-import static edu.lang.jscheme.util.ErrorUtil.assertAtom;
+import edu.lang.jscheme.data.SchemeTerm;
 
 public class TermParser extends Parser {
 
@@ -20,6 +20,5 @@ public class TermParser extends Parser {
         assertAtom(token);
         return new SchemeTerm(token.text);
     }
-
 
 }

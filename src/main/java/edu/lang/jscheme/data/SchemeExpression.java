@@ -18,6 +18,7 @@ public abstract class SchemeExpression {
         return type.cast(this);
 
     }
+
     public <T> boolean is(Class<T> type) {
         return type.isAssignableFrom(this.getClass());
     }

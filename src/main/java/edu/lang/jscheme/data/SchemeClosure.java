@@ -2,9 +2,10 @@ package edu.lang.jscheme.data;
 
 import edu.lang.jscheme.interpretor.EnvironmentBinding;
 import edu.lang.jscheme.interpretor.SchemeEnvironment;
+import edu.lang.jscheme.interpretor.internal.SchemeApplicable;
 import edu.lang.jscheme.util.LinkedList;
 
-public class SchemeClosure extends SchemeApplyable {
+public class SchemeClosure extends SchemeApplicable {
 
     public final SchemeTerm name;
     public final SchemeEnvironment environment;

@@ -1,5 +1,15 @@
 package edu.lang.jscheme.parser;
 
+import static edu.lang.jscheme.util.ErrorUtil.assertAtom;
+import static edu.lang.jscheme.util.ErrorUtil.assertNotEmpty;
+import static edu.lang.jscheme.util.ErrorUtil.invalidDefinition;
+import static edu.lang.jscheme.util.ErrorUtil.noMatchingParen;
+import static edu.lang.jscheme.util.ErrorUtil.unmatchedParen;
+import static java.util.Arrays.asList;
+
+import java.util.Iterator;
+import java.util.List;
+
 import edu.lang.jscheme.ast.AST;
 import edu.lang.jscheme.ast.ASTBlock;
 import edu.lang.jscheme.ast.ASTNode;
@@ -11,12 +21,6 @@ import edu.lang.jscheme.data.SchemeTerm;
 import edu.lang.jscheme.data.SchemeVariableDefinition;
 import edu.lang.jscheme.util.LinkedList;
 import edu.lang.jscheme.util.Try;
-
-import java.util.Iterator;
-import java.util.List;
-
-import static edu.lang.jscheme.util.ErrorUtil.*;
-import static java.util.Arrays.asList;
 
 public class SchemeParser {
 
@@ -113,7 +117,6 @@ public class SchemeParser {
         return new ASTNode(parseExpression(token));
     }
 
-
     public static Try<SchemeExpression> lexer(AST ast) {
         return Try.tryable(() -> toTopLevelExpression(ast));
     }
@@ -167,6 +170,5 @@ public class SchemeParser {
         }
         throw new IllegalArgumentException("Can not parse [" + token.text + "] at 1:" + token.position);
     }
-
 
 }

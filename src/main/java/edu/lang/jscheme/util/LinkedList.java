@@ -9,7 +9,6 @@ import java.util.function.Predicate;
 
 public abstract class LinkedList<T> implements Iterable<T> {
 
-
     public abstract T head();
 
     public abstract LinkedList<T> tail();
@@ -18,7 +17,7 @@ public abstract class LinkedList<T> implements Iterable<T> {
 
     public abstract <R> R fold(R r, BiFunction<R, T, R> f);
 
-    public abstract <R> LinkedList<R> map(Function<T,R> f);
+    public abstract <R> LinkedList<R> map(Function<T, R> f);
 
     public abstract LinkedList<T> filter(Predicate<T> p);
 

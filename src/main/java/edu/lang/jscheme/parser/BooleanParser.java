@@ -1,7 +1,6 @@
 package edu.lang.jscheme.parser;
 
 import edu.lang.jscheme.data.SchemeBoolean;
-import edu.lang.jscheme.data.SchemeTerm;
 
 public class BooleanParser extends Parser {
     @Override

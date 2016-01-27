@@ -7,7 +7,7 @@ import edu.lang.jscheme.data.SchemeExpression;
 import edu.lang.jscheme.data.SchemeExpressionSequence;
 import edu.lang.jscheme.data.SchemeValue;
 
-public class SchemeInterpretor {
+public class SchemeInterpreter {
 
     private SchemeEnvironment env = SchemeEnvironment.EMPTY;
 

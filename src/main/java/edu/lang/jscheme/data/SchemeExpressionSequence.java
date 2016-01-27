@@ -18,7 +18,7 @@ public class SchemeExpressionSequence extends SchemeExpression {
 
     @Override
     public SchemeValue eval(SchemeEnvironment env) {
-        Pair<SchemeValue, SchemeEnvironment> result =  expressions.fold(Pair.of((SchemeValue) SchemeUnit.getInstance(), env), (r, exp) -> {
+        Pair<SchemeValue, SchemeEnvironment> result = expressions.fold(Pair.of((SchemeValue) SchemeUnit.getInstance(), env), (r, exp) -> {
             SchemeValue v = exp.eval(r.getRight());
             if (exp.is(SchemeDefinition.class)) {
                 return Pair.of(v, r.getRight().addBinding(binding(exp.as(SchemeDefinition.class).name, v)));

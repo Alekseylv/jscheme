@@ -1,13 +1,12 @@
 package edu.lang.jscheme.parser;
 
-import edu.lang.jscheme.data.SchemeExpression;
-import edu.lang.jscheme.data.SchemeNumber;
-import edu.lang.jscheme.data.SchemeTerm;
-
+import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
+import edu.lang.jscheme.data.SchemeNumber;
+
 public class NumberParser extends Parser {
-    public static final Pattern pattern = Pattern.compile("^\\d{1,32}$");
+    public static final Pattern pattern = Pattern.compile("^\\d+(\\.\\d*)?$");
 
     @Override
     public boolean matches(String text) {
@@ -17,7 +16,7 @@ public class NumberParser extends Parser {
     @Override
     public SchemeNumber parse(Token token) {
         try {
-            return new SchemeNumber(Integer.parseInt(token.text));
+            return new SchemeNumber(new BigDecimal(token.text));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Can not parse [" + token.text + "] into a number");
         }
