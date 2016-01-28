@@ -17,7 +17,8 @@ public class App {
             System.out.println();
             System.out.print(">");
             String line = in.nextLine();
-            System.out.println(parseTokens(line).flatMap(SchemeParser::parseAST).flatMap(SchemeParser::lexer).map(interpreter::eval));
+            System.out.println(parseTokens(line).flatMap(SchemeParser::parseAST).flatMap(SchemeParser::lexer)
+                    .map(interpreter::eval));
         }
     }
 

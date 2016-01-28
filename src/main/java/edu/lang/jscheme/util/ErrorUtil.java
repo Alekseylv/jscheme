@@ -37,8 +37,8 @@ public class ErrorUtil {
         return new IllegalArgumentException("No matching \")\" for parenthesis starting at 1:" + token.position);
     }
 
-    public static RuntimeException invalidDefinition() {
-        return new IllegalArgumentException("Not a valid definition"); //TODO not very useful. should include line or smth
+    public static RuntimeException invalidDefinition(Token token) {
+        return new IllegalArgumentException("Not a valid definition at 1:" + token.position);
     }
 
 }

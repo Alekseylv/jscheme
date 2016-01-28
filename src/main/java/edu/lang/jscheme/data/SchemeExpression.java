@@ -4,8 +4,9 @@ import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToStrin
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import edu.lang.jscheme.interpretor.SchemeEnvironment;
+import edu.lang.jscheme.util.Castable;
 
-public abstract class SchemeExpression {
+public abstract class SchemeExpression implements Castable {
 
     public abstract SchemeValue eval(SchemeEnvironment env);
 
@@ -14,12 +15,4 @@ public abstract class SchemeExpression {
         return reflectionToString(this, SHORT_PREFIX_STYLE);
     }
 
-    public <T> T as(Class<T> type) {
-        return type.cast(this);
-
-    }
-
-    public <T> boolean is(Class<T> type) {
-        return type.isAssignableFrom(this.getClass());
-    }
 }

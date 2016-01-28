@@ -1,7 +1,6 @@
 package edu.lang.jscheme.ast;
 
 import edu.lang.jscheme.data.SchemeExpression;
-import edu.lang.jscheme.data.SchemeTerm;
 import edu.lang.jscheme.util.LinkedList;
 
 public class ASTNode extends AST {
@@ -19,11 +18,6 @@ public class ASTNode extends AST {
     @Override
     public SchemeExpression getExpression() {
         return term;
-    }
-
-    @Override
-    public SchemeTerm getTerm() {
-        return ((SchemeTerm) term);
     }
 
     @Override
