@@ -7,7 +7,8 @@ public class SchemeString extends SchemeValue {
         this.string = string;
     }
 
-    @Override public String toString() {
-        return string;
+    @Override
+    public SchemeString toSchemeString() {
+        return this;
     }
 }

@@ -7,4 +7,8 @@ public abstract class SchemeValue extends SchemeExpression {
     public SchemeValue eval(SchemeEnvironment env) {
         return this;
     }
+
+    public SchemeString toSchemeString() {
+        return new SchemeString(this.toString());
+    }
 }

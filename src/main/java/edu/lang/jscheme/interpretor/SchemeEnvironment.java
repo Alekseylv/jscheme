@@ -3,13 +3,19 @@ package edu.lang.jscheme.interpretor;
 import static edu.lang.jscheme.interpretor.EnvironmentBinding.binding;
 import static edu.lang.jscheme.interpretor.internal.BooleanApplicable.boolApplicable;
 import static edu.lang.jscheme.interpretor.internal.NumberApplicable.numApplicable;
+import static edu.lang.jscheme.interpretor.internal.SchemeApplicable.binaryApplicable;
+import static edu.lang.jscheme.interpretor.internal.SchemeApplicable.typeCheck;
 import static edu.lang.jscheme.interpretor.internal.SchemeApplicable.unaryApplicable;
 
 import java.math.BigDecimal;
 import java.util.Set;
 
 import edu.lang.jscheme.data.SchemeBoolean;
+import edu.lang.jscheme.data.SchemeCons;
+import edu.lang.jscheme.data.SchemeNumber;
+import edu.lang.jscheme.data.SchemeString;
 import edu.lang.jscheme.data.SchemeTerm;
+import edu.lang.jscheme.data.SchemeUnit;
 import edu.lang.jscheme.util.LinkedList;
 
 public class SchemeEnvironment {
@@ -21,7 +27,20 @@ public class SchemeEnvironment {
             .addBinding(binding("/", numApplicable(BigDecimal::divide)))
             .addBinding(binding("and", boolApplicable((x, y) -> x && y)))
             .addBinding(binding("or", boolApplicable((x, y) -> x || y)))
-            .addBinding(binding("not", unaryApplicable(x -> new SchemeBoolean(!x.as(SchemeBoolean.class).value))));
+            .addBinding(binding("not", unaryApplicable(x -> new SchemeBoolean(!x.as(SchemeBoolean.class).value))))
+            .addBinding(binding("cons", binaryApplicable(SchemeCons::new)))
+            .addBinding(binding("cons?", typeCheck(SchemeCons.class)))
+            .addBinding(binding("null?", typeCheck(SchemeUnit.class)))
+            .addBinding(binding("number?", typeCheck(SchemeNumber.class)))
+            .addBinding(binding("bool?", typeCheck(SchemeBoolean.class)))
+            .addBinding(binding("string?", typeCheck(SchemeString.class)))
+            .addBinding(binding("hd", unaryApplicable(x -> x.as(SchemeCons.class).head)))
+            .addBinding(binding("tl", unaryApplicable(x -> x.as(SchemeCons.class).tail)))
+            .addBinding(binding("print", unaryApplicable(x -> {
+                System.out.println(x.toSchemeString().string);
+                return SchemeUnit.getInstance();
+            })));
+
 
     public final LinkedList<EnvironmentBinding> bindings;
 

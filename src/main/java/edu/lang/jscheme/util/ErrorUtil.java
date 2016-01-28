@@ -12,9 +12,13 @@ public class ErrorUtil {
             asList('!', '#', '%', '&', '*', '+', '-', '/', ':', '<', '=', '>', '?', '@', '^',
                     '|', '~'));
 
-    public static void assertAtom(Token token) {
+    public static boolean isAtom(Token token) {
         Character c = token.text.charAt(0);
-        if (!Character.isJavaIdentifierPart(c) && !chars.contains(c)) {
+        return Character.isJavaIdentifierPart(c) || chars.contains(c);
+    }
+
+    public static void assertAtom(Token token) {
+        if (!isAtom(token)) {
             throw unexpectedToken(token);
         }
     }

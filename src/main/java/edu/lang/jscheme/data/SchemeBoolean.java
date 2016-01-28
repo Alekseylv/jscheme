@@ -8,7 +8,9 @@ public class SchemeBoolean extends SchemeValue {
         this.value = value;
     }
 
-    @Override public String toString() {
-        return String.valueOf(value);
+    @Override
+    public SchemeString toSchemeString() {
+        return new SchemeString(String.valueOf(value));
     }
+
 }

@@ -10,7 +10,8 @@ public class SchemeNumber extends SchemeValue {
         this.num = num;
     }
 
-    @Override public String toString() {
-        return num.toString();
+    @Override
+    public SchemeString toSchemeString() {
+        return new SchemeString(num.toString());
     }
 }

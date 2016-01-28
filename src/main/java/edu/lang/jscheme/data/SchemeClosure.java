@@ -29,7 +29,7 @@ public class SchemeClosure extends SchemeApplicable {
     }
 
     @Override
-    public String toString() {
-        return "<closure> " + term.name;
+    public SchemeString toSchemeString() {
+        return new SchemeString("<closure> " + term.name);
     }
 }

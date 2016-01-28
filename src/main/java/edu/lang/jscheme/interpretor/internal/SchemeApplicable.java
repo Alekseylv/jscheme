@@ -3,10 +3,19 @@ package edu.lang.jscheme.interpretor.internal;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import edu.lang.jscheme.data.SchemeBoolean;
 import edu.lang.jscheme.data.SchemeValue;
 import edu.lang.jscheme.util.LinkedList;
 
 public abstract class SchemeApplicable extends SchemeValue implements Applicable {
+
+    public static <T extends SchemeValue> SchemeApplicable typeCheck(Class<T> t) {
+        return new SchemeApplicable() {
+            @Override public SchemeValue apply(LinkedList<SchemeValue> arguments) {
+                return new SchemeBoolean(arguments.head().is(t));
+            }
+        };
+    }
 
     public static SchemeApplicable unaryApplicable(Function<SchemeValue, SchemeValue> f) {
         return new SchemeApplicable() {
