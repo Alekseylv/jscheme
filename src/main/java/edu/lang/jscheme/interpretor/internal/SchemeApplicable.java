@@ -59,4 +59,15 @@ public abstract class SchemeApplicable extends SchemeValue implements Applicable
         };
     }
 
+    public static SchemeApplicable boolApplicable(BiFunction<Boolean, Boolean, Boolean> f) {
+        return new SchemeApplicable() {
+            @Override
+            public SchemeContinuation apply(LinkedList<SchemeValue> arguments) {
+                return SchemeContinuation.continueWith(new SchemeBoolean(arguments.tail().fold(arguments.head().as(SchemeBoolean.class).value, (r, a) ->
+                        f.apply(r, a.as(SchemeBoolean.class).value)))
+                );
+            }
+        };
+    }
+
 }

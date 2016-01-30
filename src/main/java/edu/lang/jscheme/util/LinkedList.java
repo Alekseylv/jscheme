@@ -41,7 +41,7 @@ public abstract class LinkedList<T> implements Iterable<T> {
     }
 
     public LinkedList<T> reverse() {
-        return fold((LinkedList<T>) new Null<T>(), LinkedList::add);
+        return fold(empty(), LinkedList::add);
     }
 
     public LinkedList<T> add(T t) {
@@ -53,7 +53,7 @@ public abstract class LinkedList<T> implements Iterable<T> {
     }
 
     public static <T> LinkedList<T> empty() {
-        return new Null<>();
+        return Null.getInstance();
     }
 
     public static class Cons<T> extends LinkedList<T> {
@@ -107,6 +107,15 @@ public abstract class LinkedList<T> implements Iterable<T> {
 
     public static class Null<T> extends LinkedList<T> {
 
+        private static Null instance = new Null();
+
+        public static <T> Null<T> getInstance() {
+            return instance;
+        }
+
+        private Null() {
+        }
+
         @Override
         public T head() {
             throw new NoSuchElementException();
@@ -142,6 +151,7 @@ public abstract class LinkedList<T> implements Iterable<T> {
             return "Null";
         }
     }
+
 
     private static class ListIterator<T> implements Iterator<T> {
         private LinkedList<T> list;
