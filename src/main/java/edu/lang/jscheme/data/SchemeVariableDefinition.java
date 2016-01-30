@@ -1,6 +1,7 @@
 package edu.lang.jscheme.data;
 
 import edu.lang.jscheme.interpretor.SchemeEnvironment;
+import edu.lang.jscheme.interpretor.internal.SchemeContinuation;
 
 public class SchemeVariableDefinition extends SchemeDefinition {
 
@@ -12,7 +13,7 @@ public class SchemeVariableDefinition extends SchemeDefinition {
     }
 
     @Override
-    public SchemeValue eval(SchemeEnvironment env) {
+    public SchemeContinuation eval(SchemeEnvironment env) {
         return value.eval(env);
     }
 }

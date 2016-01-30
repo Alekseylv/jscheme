@@ -13,7 +13,8 @@ public class VariableDefinitionLexer extends Lexer {
         return isName(ast, "define") && ast.size() > 2 && !ast.getLeafs().tail().head().isBlock();
     }
 
-    @Override public SchemeExpression toExpression(ASTBlock ast) {
+    @Override
+    public SchemeExpression toExpression(ASTBlock ast) {
         SchemeExpression body = toBodyExpression(ast.getLeafs().tail().tail());
         return new SchemeVariableDefinition(ast.getLeafs().tail().head().getExpression().as(SchemeTerm.class), body);
 

@@ -4,6 +4,7 @@ import static edu.lang.jscheme.parser.SchemeParser.parseTokens;
 
 import java.util.Scanner;
 
+import edu.lang.jscheme.data.SchemeFunctionApplication;
 import edu.lang.jscheme.interpretor.SchemeInterpreter;
 import edu.lang.jscheme.parser.SchemeParser;
 
@@ -22,4 +23,13 @@ public class REPL {
         }
     }
 
+
+    /*
+
+    (define (foreach l f) (if (null? l) () (foreach (cdr l) f (f (car l)))))
+    (define (generate n) ((define (gen n acc) (if (> 0 n) (gen (- n 1) (cons n acc)) acc)) n ()))
+
+    (foreach (generate 100) print)
+
+     */
 }

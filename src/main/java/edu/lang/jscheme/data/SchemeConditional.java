@@ -1,6 +1,7 @@
 package edu.lang.jscheme.data;
 
 import edu.lang.jscheme.interpretor.SchemeEnvironment;
+import edu.lang.jscheme.interpretor.internal.SchemeContinuation;
 
 public class SchemeConditional extends SchemeExpression {
 
@@ -15,7 +16,7 @@ public class SchemeConditional extends SchemeExpression {
     }
 
     @Override
-    public SchemeValue eval(SchemeEnvironment env) {
-        return test.eval(env).as(SchemeBoolean.class).value ? path1.eval(env) : path2.eval(env);
+    public SchemeContinuation eval(SchemeEnvironment env) {
+        return test.forceEval(env).as(SchemeBoolean.class).value ? path1.eval(env) : path2.eval(env);
     }
 }

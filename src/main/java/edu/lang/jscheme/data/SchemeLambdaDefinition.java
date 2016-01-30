@@ -1,6 +1,7 @@
 package edu.lang.jscheme.data;
 
 import edu.lang.jscheme.interpretor.SchemeEnvironment;
+import edu.lang.jscheme.interpretor.internal.SchemeContinuation;
 import edu.lang.jscheme.util.LinkedList;
 
 public class SchemeLambdaDefinition extends SchemeExpression {
@@ -14,7 +15,7 @@ public class SchemeLambdaDefinition extends SchemeExpression {
     }
 
     @Override
-    public SchemeValue eval(SchemeEnvironment env) {
-        return new SchemeClosure(null, env, argNames, body);
+    public SchemeContinuation eval(SchemeEnvironment env) {
+        return SchemeContinuation.continueWith(new SchemeClosure(null, env, argNames, body));
     }
 }

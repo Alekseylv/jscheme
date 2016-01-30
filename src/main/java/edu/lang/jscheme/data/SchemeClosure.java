@@ -5,6 +5,7 @@ import static edu.lang.jscheme.interpretor.EnvironmentBinding.binding;
 import edu.lang.jscheme.interpretor.EnvironmentBinding;
 import edu.lang.jscheme.interpretor.SchemeEnvironment;
 import edu.lang.jscheme.interpretor.internal.SchemeApplicable;
+import edu.lang.jscheme.interpretor.internal.SchemeContinuation;
 import edu.lang.jscheme.util.LinkedList;
 
 public class SchemeClosure extends SchemeApplicable {
@@ -15,7 +16,7 @@ public class SchemeClosure extends SchemeApplicable {
     public final SchemeExpression body;
 
     public SchemeClosure(SchemeTerm term, SchemeEnvironment environment,
-            LinkedList<SchemeTerm> arguments, SchemeExpression body) {
+                         LinkedList<SchemeTerm> arguments, SchemeExpression body) {
         this.term = term;
         this.environment = environment;
         this.arguments = arguments;
@@ -23,7 +24,7 @@ public class SchemeClosure extends SchemeApplicable {
     }
 
     @Override
-    public SchemeValue apply(LinkedList<SchemeValue> arguments) {
+    public SchemeContinuation apply(LinkedList<SchemeValue> arguments) {
         SchemeEnvironment env = environment.addBinding(this.arguments.zip(arguments, EnvironmentBinding::binding));
         if (term != null) {
             env = env.addBinding(binding(term, this));

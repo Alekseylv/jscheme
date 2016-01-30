@@ -1,5 +1,7 @@
 package edu.lang.jscheme.util;
 
+import com.google.common.base.Throwables;
+
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
@@ -105,7 +107,7 @@ public abstract class Try<T> {
 
         @Override
         public String toString() {
-            return e.toString();
+            return Throwables.getStackTraceAsString(e);
         }
     }
 }

@@ -5,11 +5,13 @@ import edu.lang.jscheme.data.SchemeExpression;
 import edu.lang.jscheme.data.SchemeUnit;
 
 public class UnitValueLexer extends Lexer {
-    @Override public boolean matches(ASTBlock ast) {
+    @Override
+    public boolean matches(ASTBlock ast) {
         return ast.getLeafs().isEmpty();
     }
 
-    @Override public SchemeExpression toExpression(ASTBlock ast) {
+    @Override
+    public SchemeExpression toExpression(ASTBlock ast) {
         return SchemeUnit.getInstance();
     }
 }

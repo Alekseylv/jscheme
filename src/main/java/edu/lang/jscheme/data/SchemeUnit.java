@@ -10,7 +10,8 @@ public class SchemeUnit extends SchemeValue {
     private SchemeUnit() {
     }
 
-    @Override public SchemeString toSchemeString() {
+    @Override
+    public SchemeString toSchemeString() {
         return new SchemeString("null");
     }
 }

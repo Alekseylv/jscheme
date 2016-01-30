@@ -19,7 +19,8 @@ public class ASTBlock extends AST {
         return true;
     }
 
-    @Override public SchemeExpression getExpression() {
+    @Override
+    public SchemeExpression getExpression() {
         throw new UnsupportedOperationException("Not a node");
     }
 

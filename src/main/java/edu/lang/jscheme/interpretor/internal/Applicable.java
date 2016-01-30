@@ -5,5 +5,5 @@ import edu.lang.jscheme.util.LinkedList;
 
 @FunctionalInterface
 public interface Applicable {
-    SchemeValue apply(LinkedList<SchemeValue> arguments);
+    SchemeContinuation apply(LinkedList<SchemeValue> arguments);
 }

@@ -15,9 +15,9 @@ public class BooleanApplicable extends SchemeApplicable {
     }
 
     @Override
-    public SchemeValue apply(LinkedList<SchemeValue> arguments) {
-        return new SchemeBoolean(arguments.tail().fold(arguments.head().as(SchemeBoolean.class).value, (r, a) ->
-                f.apply(r, a.as(SchemeBoolean.class).value))
+    public SchemeContinuation apply(LinkedList<SchemeValue> arguments) {
+        return SchemeContinuation.continueWith(new SchemeBoolean(arguments.tail().fold(arguments.head().as(SchemeBoolean.class).value, (r, a) ->
+                f.apply(r, a.as(SchemeBoolean.class).value)))
         );
     }
 

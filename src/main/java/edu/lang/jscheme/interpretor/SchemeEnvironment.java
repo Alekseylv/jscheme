@@ -2,8 +2,9 @@ package edu.lang.jscheme.interpretor;
 
 import static edu.lang.jscheme.interpretor.EnvironmentBinding.binding;
 import static edu.lang.jscheme.interpretor.internal.BooleanApplicable.boolApplicable;
-import static edu.lang.jscheme.interpretor.internal.NumberApplicable.numApplicable;
 import static edu.lang.jscheme.interpretor.internal.SchemeApplicable.binaryApplicable;
+import static edu.lang.jscheme.interpretor.internal.SchemeApplicable.numApplicable;
+import static edu.lang.jscheme.interpretor.internal.SchemeApplicable.numberTest;
 import static edu.lang.jscheme.interpretor.internal.SchemeApplicable.typeCheck;
 import static edu.lang.jscheme.interpretor.internal.SchemeApplicable.unaryApplicable;
 
@@ -25,6 +26,9 @@ public class SchemeEnvironment {
             .addBinding(binding("-", numApplicable(BigDecimal::subtract)))
             .addBinding(binding("*", numApplicable(BigDecimal::multiply)))
             .addBinding(binding("/", numApplicable(BigDecimal::divide)))
+            .addBinding(binding(">", numberTest((x, y) -> x.compareTo(y) == -1)))
+            .addBinding(binding("<", numberTest((x, y) -> x.compareTo(y) == 1)))
+            .addBinding(binding("=", numberTest((x, y) -> x.compareTo(y) == 0)))
             .addBinding(binding("and", boolApplicable((x, y) -> x && y)))
             .addBinding(binding("or", boolApplicable((x, y) -> x || y)))
             .addBinding(binding("not", unaryApplicable(x -> new SchemeBoolean(!x.as(SchemeBoolean.class).value))))
