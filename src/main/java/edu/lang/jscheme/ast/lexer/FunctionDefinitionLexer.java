@@ -16,9 +16,7 @@ public class FunctionDefinitionLexer extends Lexer {
 
     @Override
     public SchemeExpression toExpression(ASTBlock ast) {
-        SchemeExpression body = toBodyExpression(ast.getLeafs().tail().tail());
-
         LinkedList<SchemeTerm> args = ast.getLeafs().tail().head().getLeafs().map(x -> x.getExpression().as(SchemeTerm.class));
-        return new SchemeFunctionDefinition(args.head(), args.tail(), body);
+        return new SchemeFunctionDefinition(args.head(), args.tail(), toBodyExpression(ast.getLeafs().tail().tail()));
     }
 }

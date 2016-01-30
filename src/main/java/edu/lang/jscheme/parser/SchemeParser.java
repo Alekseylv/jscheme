@@ -1,6 +1,5 @@
 package edu.lang.jscheme.parser;
 
-import static edu.lang.jscheme.util.ErrorUtil.assertAtom;
 import static edu.lang.jscheme.util.ErrorUtil.invalidDefinition;
 import static edu.lang.jscheme.util.ErrorUtil.noMatchingParen;
 import static edu.lang.jscheme.util.ErrorUtil.unmatchedParen;
@@ -13,13 +12,12 @@ import java.util.List;
 import edu.lang.jscheme.ast.AST;
 import edu.lang.jscheme.ast.ASTBlock;
 import edu.lang.jscheme.ast.ASTNode;
-import edu.lang.jscheme.ast.lexer.BadDefinitionLexer;
 import edu.lang.jscheme.ast.lexer.ConditionalLexer;
+import edu.lang.jscheme.ast.lexer.DefinitionLexer;
 import edu.lang.jscheme.ast.lexer.FunctionApplicationLexer;
-import edu.lang.jscheme.ast.lexer.FunctionDefinitionLexer;
+import edu.lang.jscheme.ast.lexer.LambdaLexer;
 import edu.lang.jscheme.ast.lexer.Lexer;
 import edu.lang.jscheme.ast.lexer.UnitValueLexer;
-import edu.lang.jscheme.ast.lexer.VariableDefinitionLexer;
 import edu.lang.jscheme.data.SchemeExpression;
 import edu.lang.jscheme.data.SchemeExpressionSequence;
 import edu.lang.jscheme.util.LinkedList;
@@ -30,8 +28,8 @@ public class SchemeParser {
     public static final String NEW_LINE = System.getProperty("line.separator"); //TODO add newline support (store line number in token?)
     private static final TermParser TERM_PARSER = new TermParser();
     private static final List<Parser> EXPRESSION_PARSERS = asList(new BooleanParser(), new NumberParser(), new StringParser(), TERM_PARSER);
-    private static final List<Lexer> LEXERS = asList(new ConditionalLexer(), new FunctionDefinitionLexer(), new VariableDefinitionLexer(), new BadDefinitionLexer(),
-            new UnitValueLexer(), new FunctionApplicationLexer());
+    private static final List<Lexer> LEXERS = asList(new ConditionalLexer(), new DefinitionLexer(), new UnitValueLexer(), new LambdaLexer(),
+            new FunctionApplicationLexer());
 
     public static Try<LinkedList<Token>> parseTokens(final String line) {
         return Try.tryable(() -> {

@@ -34,8 +34,8 @@ public class SchemeEnvironment {
             .addBinding(binding("number?", typeCheck(SchemeNumber.class)))
             .addBinding(binding("bool?", typeCheck(SchemeBoolean.class)))
             .addBinding(binding("string?", typeCheck(SchemeString.class)))
-            .addBinding(binding("hd", unaryApplicable(x -> x.as(SchemeCons.class).head)))
-            .addBinding(binding("tl", unaryApplicable(x -> x.as(SchemeCons.class).tail)))
+            .addBinding(binding("car", unaryApplicable(x -> x.as(SchemeCons.class).head)))
+            .addBinding(binding("cdr", unaryApplicable(x -> x.as(SchemeCons.class).tail)))
             .addBinding(binding("print", unaryApplicable(x -> {
                 System.out.println(x.toSchemeString().string);
                 return SchemeUnit.getInstance();

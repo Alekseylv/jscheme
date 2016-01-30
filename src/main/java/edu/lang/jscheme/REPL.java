@@ -7,7 +7,7 @@ import java.util.Scanner;
 import edu.lang.jscheme.interpretor.SchemeInterpreter;
 import edu.lang.jscheme.parser.SchemeParser;
 
-public class App {
+public class REPL {
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);

@@ -24,8 +24,12 @@ public class SchemeClosure extends SchemeApplicable {
 
     @Override
     public SchemeValue apply(LinkedList<SchemeValue> arguments) {
-        return body.eval(environment.addBinding(this.arguments.zip(arguments, EnvironmentBinding::binding))
-                .addBinding(binding(term, this)));
+        SchemeEnvironment env = environment.addBinding(this.arguments.zip(arguments, EnvironmentBinding::binding));
+        if (term != null) {
+            env = env.addBinding(binding(term, this));
+        }
+        return body.eval(env);
+
     }
 
     @Override
